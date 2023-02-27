@@ -1,0 +1,11 @@
+[2023-02-27 03:15:24] [1] [INFO] [TestNG] Running:
+  C:\Users\agomez\AppData\Local\JetBrains\IdeaIC2022.2\temp-testng-customsuite.xml
+
+[2023-02-27 03:15:24] [1] [WARN] Override property for current test 's3_region=us-west-2'!
+[2023-02-27 03:15:25] [1] [WARN] Overridden 's3_region=us-west-2' property will be used for current test!
+[2023-02-27 03:15:26] [1] [INFO] App will be downloaded from s3.
+[2023-02-27 03:15:26] [1] [INFO] [Bucket name: qaprosoft] [Key: carinademoexample.apk] [File: F:\Documentos\JAVA_GITHUB_REPOSITORY\carina-project\api-automation\reports\1677510924554\downloads\carinademoexample.apk]
+[2023-02-27 03:15:36] [1] [INFO] Transfer: Downloading from qaprosoft/carinademoexample.apk
+[2023-02-27 03:15:36] [1] [INFO] 	 State: Waiting
+[2023-02-27 03:15:36] [1] [INFO] 	 Progress: 
+[2023-02-27 03:15:36] [1] [INFO] 		 transferred: 0%
