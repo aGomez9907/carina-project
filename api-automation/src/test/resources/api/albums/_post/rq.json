@@ -1,0 +1,7 @@
+[
+  {
+    <#if userId??>"userId": "${userId}",</#if>
+    <#if id??>"id": "${id}",</#if>
+    <#if title??>"title": "${title}"</#if>
+  }
+]

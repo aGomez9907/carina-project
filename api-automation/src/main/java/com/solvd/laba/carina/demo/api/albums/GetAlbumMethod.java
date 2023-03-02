@@ -1,4 +1,4 @@
-package com.solvd.laba.carina.demo.api;
+package com.solvd.laba.carina.demo.api.albums;
 
 import com.qaprosoft.carina.core.foundation.api.AbstractApiMethodV2;
 import com.qaprosoft.carina.core.foundation.api.annotation.Endpoint;
@@ -8,11 +8,11 @@ import com.qaprosoft.carina.core.foundation.api.http.HttpMethodType;
 import com.qaprosoft.carina.core.foundation.api.http.HttpResponseStatusType;
 import com.zebrunner.carina.utils.Configuration;
 
-@Endpoint(url = "${base_url}/albums", methodType = HttpMethodType.GET)
+@Endpoint(url = "${config.env.api_url}/albums", methodType = HttpMethodType.GET)
 @ResponseTemplatePath(path = "api/albums/_get/rs.json")
 @SuccessfulHttpStatus(status = HttpResponseStatusType.OK_200)
-public class GetAlbumMethods extends AbstractApiMethodV2 {
-    public GetAlbumMethods() {
-        replaceUrlPlaceholder("base_url", Configuration.getEnvArg("api_url"));
+public class GetAlbumMethod extends AbstractApiMethodV2 {
+    public GetAlbumMethod() {
+
     }
 }
