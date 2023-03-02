@@ -4,8 +4,6 @@ import com.qaprosoft.carina.core.foundation.api.AbstractApiMethodV2;
 import com.qaprosoft.carina.core.foundation.api.annotation.*;
 import com.qaprosoft.carina.core.foundation.api.http.HttpMethodType;
 import com.qaprosoft.carina.core.foundation.api.http.HttpResponseStatusType;
-import com.zebrunner.carina.utils.Configuration;
-import org.apache.commons.digester.annotations.rules.SetProperty;
 
 @Endpoint(url = "${config.env.api_url}/albums", methodType = HttpMethodType.POST)
 @RequestTemplatePath(path = "api/albums/_post/rq.json")

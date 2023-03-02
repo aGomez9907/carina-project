@@ -28,7 +28,7 @@ public class ApiTest implements IAbstractTest {
 
     @Test()
     @MethodOwner(owner = "agomez")
-    public void testCreateAlbum() throws Exception {
+    public void testCreateAlbum() {
         LOGGER.info("test post");
 
         PostAlbumMethod api = new PostAlbumMethod();
@@ -38,7 +38,7 @@ public class ApiTest implements IAbstractTest {
 
     @Test()
     @MethodOwner(owner = "agomez")
-    public void testCreateAlbumWithMissingFields() throws Exception {
+    public void testCreateAlbumWithMissingFields() {
         LOGGER.info("test post w/ missing fields");
 
         PostAlbumMethod api = new PostAlbumMethod();
