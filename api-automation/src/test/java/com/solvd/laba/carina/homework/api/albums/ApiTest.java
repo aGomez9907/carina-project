@@ -1,10 +1,7 @@
-package com.solvd.laba.carina.albums;
+package com.solvd.laba.carina.homework.api.albums;
 
 import com.qaprosoft.apitools.validation.JsonCompareKeywords;
 import com.qaprosoft.carina.core.foundation.IAbstractTest;
-import com.solvd.laba.carina.demo.api.albums.GetAlbumMethod;
-import com.solvd.laba.carina.demo.api.albums.PatchAlbumMethod;
-import com.solvd.laba.carina.demo.api.albums.PostAlbumMethod;
 import com.zebrunner.carina.core.registrar.ownership.MethodOwner;
 import io.restassured.response.Response;
 import org.skyscreamer.jsonassert.JSONCompareMode;
