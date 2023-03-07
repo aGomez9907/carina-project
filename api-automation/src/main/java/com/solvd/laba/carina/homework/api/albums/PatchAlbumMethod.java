@@ -13,6 +13,7 @@ import com.qaprosoft.carina.core.foundation.api.http.HttpResponseStatusType;
 @ResponseTemplatePath(path = "api/albums/_patch/rs.json")
 @SuccessfulHttpStatus(status = HttpResponseStatusType.OK_200)
 public class PatchAlbumMethod extends AbstractApiMethodV2 {
-    public PatchAlbumMethod() {
+    public PatchAlbumMethod(int id) {
+        replaceUrlPlaceholder("id", String.valueOf(id));
     }
 }

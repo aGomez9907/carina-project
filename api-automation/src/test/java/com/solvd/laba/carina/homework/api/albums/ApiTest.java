@@ -53,8 +53,7 @@ public class ApiTest implements IAbstractTest {
         Response response = api.callAPIExpectSuccess();
         api.validateResponse();
 
-        PatchAlbumMethod patchAlbumMethod = new PatchAlbumMethod();
-        patchAlbumMethod.replaceUrlPlaceholder("id", Integer.toString(response.jsonPath().getInt("id")));
+        PatchAlbumMethod patchAlbumMethod = new PatchAlbumMethod(response.jsonPath().getInt("id"));
         patchAlbumMethod.callAPIExpectSuccess();
         api.validateResponse();
     }
