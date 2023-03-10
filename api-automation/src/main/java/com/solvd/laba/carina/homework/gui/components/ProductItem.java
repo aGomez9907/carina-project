@@ -2,12 +2,12 @@ package com.solvd.laba.carina.homework.gui.components;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractUIObject;
-import com.solvd.laba.carina.homework.gui.pages.InventoryItem;
+import com.solvd.laba.carina.homework.gui.pages.InventoryItemPage;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
-public class Item extends AbstractUIObject {
+public class ProductItem extends AbstractUIObject {
     @FindBy(className = "inventory_item_name")
     public ExtendedWebElement itemName;
     @FindBy(className = "inventory_item_desc")
@@ -19,13 +19,13 @@ public class Item extends AbstractUIObject {
     public ExtendedWebElement addToCartButton;
 
 
-    public Item(WebDriver driver, SearchContext sc) {
+    public ProductItem(WebDriver driver, SearchContext sc) {
         super(driver, sc);
     }
 
-    public InventoryItem clickItemName() {
+    public InventoryItemPage clickItemName() {
         itemName.click();
-        return new InventoryItem(getDriver());
+        return new InventoryItemPage(getDriver());
     }
 
     public String readItemName() {

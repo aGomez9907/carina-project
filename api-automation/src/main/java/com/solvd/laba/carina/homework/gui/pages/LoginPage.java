@@ -2,7 +2,6 @@ package com.solvd.laba.carina.homework.gui.pages;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractPage;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
@@ -36,7 +35,7 @@ public class LoginPage extends AbstractPage {
     }
 
     public boolean isError() {
-        return !driver.findElements(By.cssSelector("button.error-button")).isEmpty();
+        return errorButton.isElementPresent(3);
 
 
     }

@@ -5,25 +5,25 @@ import com.qaprosoft.carina.core.gui.AbstractPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
-public class CheckoutStepTwo extends AbstractPage {
+public class CheckoutStepTwoPage extends AbstractPage {
 
     @FindBy(id = "finish")
     private ExtendedWebElement finishButton;
     @FindBy(id = "cancel")
     private ExtendedWebElement cancelButton;
 
-    public CheckoutStepTwo(WebDriver driver) {
+    public CheckoutStepTwoPage(WebDriver driver) {
         super(driver);
         setPageURL("checkout-step-two.html");
     }
 
-    public CheckoutStepOne clickCancelButton() {
+    public CheckoutStepOnePage clickCancelButton() {
         cancelButton.click();
-        return new CheckoutStepOne(getDriver());
+        return new CheckoutStepOnePage(getDriver());
     }
 
-    public CheckoutComplete clickFinishButton() {
+    public CheckoutCompletePage clickFinishButton() {
         finishButton.click();
-        return new CheckoutComplete(getDriver());
+        return new CheckoutCompletePage(getDriver());
     }
 }

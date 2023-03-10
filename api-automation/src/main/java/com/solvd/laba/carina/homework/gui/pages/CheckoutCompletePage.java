@@ -5,12 +5,12 @@ import com.qaprosoft.carina.core.gui.AbstractPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
-public class CheckoutComplete extends AbstractPage {
+public class CheckoutCompletePage extends AbstractPage {
 
     @FindBy(id = "back-to-products")
     private ExtendedWebElement backHome;
 
-    public CheckoutComplete(WebDriver driver) {
+    public CheckoutCompletePage(WebDriver driver) {
         super(driver);
         setPageURL("checkout-complete.html");
     }

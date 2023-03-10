@@ -5,6 +5,7 @@ import com.solvd.laba.carina.homework.gui.components.FooterMenu;
 import com.solvd.laba.carina.homework.gui.components.Header;
 import com.solvd.laba.carina.homework.gui.dataprovider.CheckoutProvider;
 import com.solvd.laba.carina.homework.gui.pages.*;
+import com.solvd.laba.carina.homework.services.LoginService;
 import com.zebrunner.carina.core.registrar.ownership.MethodOwner;
 import com.zebrunner.carina.utils.R;
 import org.openqa.selenium.WebDriver;
@@ -20,10 +21,9 @@ public class SauceDemoWithStandardUser implements IAbstractTest {
 
     @BeforeMethod
     public void login() {
-        LoginPage login = new LoginPage(getDriver());
-        login.open();
-        login.fillLoginData(R.TESTDATA.get("sauce_demo_username_standard"), R.TESTDATA.get("sauce_demo_password"));
-        login.clickLoginButton();
+        LoginService ls = new LoginService(getDriver());
+        InventoryPage inventoryPage = ls.login(R.TESTDATA.get("sauce_demo_username_standard"), R.TESTDATA.get("sauce_demo_password"));
+        inventoryPage.assertPageOpened();
     }
 
 
@@ -31,8 +31,9 @@ public class SauceDemoWithStandardUser implements IAbstractTest {
     @MethodOwner(owner = "agomez")
     public void testItems() {
         InventoryPage inventoryPage = new InventoryPage(getDriver());
-        InventoryItem inventoryItem = inventoryPage.selectItemByName("Sauce Labs Onesie");
-        Assert.assertTrue(inventoryItem.assertInventoryItem("Sauce Labs Onesie"), "Incorrect item page");
+        InventoryItemPage inventoryItemPage = inventoryPage.selectItemByName("Sauce Labs Onesie");
+        inventoryItemPage.assertPageOpened();
+        Assert.assertTrue(inventoryItemPage.assertInventoryItem("Sauce Labs Onesie"), "Incorrect item page");
     }
 
     @Test(dataProvider = "CheckoutData", dataProviderClass = CheckoutProvider.class)
@@ -42,24 +43,25 @@ public class SauceDemoWithStandardUser implements IAbstractTest {
 
         InventoryPage inventoryPage = new InventoryPage(getDriver());
 
-        InventoryItem inventoryItem = inventoryPage.selectItemByName("Sauce Labs Onesie");
-        inventoryItem.clickAddToCart();
+        InventoryItemPage inventoryItemPage = inventoryPage.selectItemByName("Sauce Labs Onesie");
+        inventoryItemPage.assertPageOpened();
+        inventoryItemPage.clickAddToCart();
         driver.navigate().back();
 
         Header header = inventoryPage.getHeader();
 
-        Cart cart = header.clickCart();
-        cart.assertPageOpened();
+        CartPage cartPage = header.clickCart();
+        cartPage.assertPageOpened();
 
-        CheckoutStepOne checkoutStepOne = cart.clickCheckoutButton();
-        checkoutStepOne.assertPageOpened();
+        CheckoutStepOnePage checkoutStepOnePage = cartPage.clickCheckoutButton();
+        checkoutStepOnePage.assertPageOpened();
 
-        checkoutStepOne.fillClientInfo(firstName, lastName, zipCode);
-        CheckoutStepTwo checkoutStepTwo = checkoutStepOne.clickContinueButton();
-        checkoutStepTwo.assertPageOpened();
+        checkoutStepOnePage.fillClientInfo(firstName, lastName, zipCode);
+        CheckoutStepTwoPage checkoutStepTwoPage = checkoutStepOnePage.clickContinueButton();
+        checkoutStepTwoPage.assertPageOpened();
 
-        CheckoutComplete checkoutComplete = checkoutStepTwo.clickFinishButton();
-        checkoutComplete.assertPageOpened();
+        CheckoutCompletePage checkoutCompletePage = checkoutStepTwoPage.clickFinishButton();
+        checkoutCompletePage.assertPageOpened();
 
 
     }
@@ -86,7 +88,7 @@ public class SauceDemoWithStandardUser implements IAbstractTest {
         InventoryPage inventoryPage = new InventoryPage(getDriver());
 
         FooterMenu footer = inventoryPage.getFooter();
-        Facebook fb = footer.clickFacebook();
+        FacebookPage fb = footer.clickFacebook();
         ArrayList<String> handlers = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(handlers.get(1));
         fb.assertPageOpened();

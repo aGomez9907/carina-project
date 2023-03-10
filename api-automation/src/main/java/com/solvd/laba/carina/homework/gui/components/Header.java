@@ -2,7 +2,7 @@ package com.solvd.laba.carina.homework.gui.components;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractUIObject;
-import com.solvd.laba.carina.homework.gui.pages.Cart;
+import com.solvd.laba.carina.homework.gui.pages.CartPage;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -31,9 +31,9 @@ public class Header extends AbstractUIObject {
     }
 
 
-    public Cart clickCart() {
+    public CartPage clickCart() {
         shoppingCart.click();
-        return new Cart(getDriver());
+        return new CartPage(getDriver());
     }
 
     public void clickSort() {
