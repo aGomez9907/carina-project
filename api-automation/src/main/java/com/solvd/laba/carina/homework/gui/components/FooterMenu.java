@@ -2,6 +2,9 @@ package com.solvd.laba.carina.homework.gui.components;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractUIObject;
+import com.solvd.laba.carina.homework.gui.pages.Facebook;
+import com.solvd.laba.carina.homework.gui.pages.Linkedin;
+import com.solvd.laba.carina.homework.gui.pages.Twitter;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -19,15 +22,18 @@ public class FooterMenu extends AbstractUIObject {
     }
 
 
-    public void clickTwitter() {
+    public Twitter clickTwitter() {
         twitterButton.click();
+        return new Twitter(getDriver());
     }
 
-    public void clickFacebook() {
+    public Facebook clickFacebook() {
         facebookButton.click();
+        return new Facebook(getDriver());
     }
 
-    public void clickLinkedin() {
+    public Linkedin clickLinkedin() {
         linkedinButton.click();
+        return new Linkedin(getDriver());
     }
 }

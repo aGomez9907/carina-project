@@ -1,26 +1,31 @@
 package com.solvd.laba.carina.homework.gui.pages;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
-import com.qaprosoft.carina.core.foundation.webdriver.decorator.PageOpeningStrategy;
 import com.qaprosoft.carina.core.gui.AbstractPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 public class InventoryItem extends AbstractPage {
 
-    @FindBy(xpath = "//div[@class='inventory_details_name']")
+    @FindBy(className = "inventory_details_name")
     private ExtendedWebElement productName;
-
-    @FindBy(xpath = "//div[@class='inventory_details_desc']")
+    @FindBy(className = "inventory_details_desc")
     private ExtendedWebElement productDescription;
-    @FindBy(xpath = "//div[@class='inventory_details_price']")
+    @FindBy(className = "inventory_details_price")
     private ExtendedWebElement productPrice;
+    @FindBy(xpath = "//button[contains(text(),'Add to cart')]")
+    private ExtendedWebElement addToCartButton;
 
-    public InventoryItem(WebDriver driver, int id) {
+
+    public InventoryItem(WebDriver driver) {
         super(driver);
-        setPageOpeningStrategy(PageOpeningStrategy.BY_ELEMENT);
-        setUiLoadedMarker(productName);
-        setUiLoadedMarker(productDescription);
-        setUiLoadedMarker(productPrice);
+    }
+
+    public void clickAddToCart() {
+        addToCartButton.click();
+    }
+
+    public boolean assertInventoryItem(String name) {
+        return productName.getText().equals(name);
     }
 }

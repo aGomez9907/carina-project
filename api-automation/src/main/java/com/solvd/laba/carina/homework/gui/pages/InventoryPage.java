@@ -1,9 +1,10 @@
 package com.solvd.laba.carina.homework.gui.pages;
 
-import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractPage;
 import com.solvd.laba.carina.homework.gui.components.FooterMenu;
 import com.solvd.laba.carina.homework.gui.components.Header;
+import com.solvd.laba.carina.homework.gui.components.Item;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
@@ -16,14 +17,8 @@ public class InventoryPage extends AbstractPage {
     private Header header;
     @FindBy(className = "footer")
     private FooterMenu footer;
-    @FindBy(id = "item_4_title_link")
-    private ExtendedWebElement backpack;
-
-    @FindBy(id = "add-to-cart-sauce-labs-backpack")
-    private ExtendedWebElement addBackpackButton;
-
-    @FindBy(className = "inventory_item_price")
-    private List<ExtendedWebElement> itemPrices;
+    @FindBy(xpath = "//div[@class='inventory_item']")
+    private List<Item> items;
 
 
     public InventoryPage(WebDriver driver) {
@@ -31,21 +26,21 @@ public class InventoryPage extends AbstractPage {
         setPageURL("inventory.html");
     }
 
-
-    public InventoryItem clickBackpack() {
-        backpack.click();
-        return new InventoryItem(getDriver(), 4);
-    }
-
-
-    public void addBackpack() {
-        addBackpackButton.click();
+    public InventoryItem selectItemByName(String name) {
+        InventoryItem ii = null;
+        for (Item i : items) {
+            if (i.readItemName().equals(name)) {
+                ii = i.clickItemName();
+                break;
+            }
+        }
+        return ii;
     }
 
     public List<Double> getItemPrices() {
         List<Double> prices = new ArrayList<Double>();
-        itemPrices.forEach(e -> {
-            prices.add(Double.parseDouble(e.getText().replaceAll("[$]", "")));
+        items.forEach(e -> {
+            prices.add(Double.parseDouble(e.readItemPrice().replaceAll("[$]", "")));
         });
         return prices;
     }
@@ -56,5 +51,13 @@ public class InventoryPage extends AbstractPage {
 
     public FooterMenu getFooter() {
         return footer;
+    }
+
+    public boolean isProblematic() {
+        return !driver.findElements(By.xpath("//img[@src= '/static/media/sl-404.168b1cce.jpg']")).isEmpty();
+    }
+
+    public List<Item> getItems() {
+        return items;
     }
 }

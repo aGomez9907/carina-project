@@ -17,17 +17,13 @@ import java.util.List;
 
 public class SauceDemoWithStandardUser implements IAbstractTest {
 
-    //test login with standard_user
-    @Test()
-    @MethodOwner(owner = "agomez")
+
     @BeforeMethod
-    public void standardLoginTest() {
+    public void login() {
         LoginPage login = new LoginPage(getDriver());
         login.open();
-        login.assertPageOpened();
         login.fillLoginData(R.TESTDATA.get("sauce_demo_username_standard"), R.TESTDATA.get("sauce_demo_password"));
-        InventoryPage inventoryPage = login.clickLoginButton();
-        inventoryPage.assertPageOpened();
+        login.clickLoginButton();
     }
 
 
@@ -35,15 +31,20 @@ public class SauceDemoWithStandardUser implements IAbstractTest {
     @MethodOwner(owner = "agomez")
     public void testItems() {
         InventoryPage inventoryPage = new InventoryPage(getDriver());
-        InventoryItem inventoryItem = inventoryPage.clickBackpack();
-        inventoryItem.assertPageOpened(3);
+        InventoryItem inventoryItem = inventoryPage.selectItemByName("Sauce Labs Onesie");
+        Assert.assertTrue(inventoryItem.assertInventoryItem("Sauce Labs Onesie"), "Incorrect item page");
     }
 
     @Test(dataProvider = "CheckoutData", dataProviderClass = CheckoutProvider.class)
     @MethodOwner(owner = "agomez")
     public void createOrderTest(String firstName, String lastName, String zipCode) {
+        WebDriver driver = getDriver();
+
         InventoryPage inventoryPage = new InventoryPage(getDriver());
-        inventoryPage.addBackpack();
+
+        InventoryItem inventoryItem = inventoryPage.selectItemByName("Sauce Labs Onesie");
+        inventoryItem.clickAddToCart();
+        driver.navigate().back();
 
         Header header = inventoryPage.getHeader();
 
@@ -59,7 +60,7 @@ public class SauceDemoWithStandardUser implements IAbstractTest {
 
         CheckoutComplete checkoutComplete = checkoutStepTwo.clickFinishButton();
         checkoutComplete.assertPageOpened();
-        checkoutComplete.clickBackHome();
+
 
     }
 
@@ -68,13 +69,12 @@ public class SauceDemoWithStandardUser implements IAbstractTest {
     @MethodOwner(owner = "agomez")
     public void testSorting() {
         InventoryPage inventoryPage = new InventoryPage(getDriver());
-
         Header header = inventoryPage.getHeader();
         header.clickSort();
         header.sortLoToHi();
         List<Double> prices = inventoryPage.getItemPrices();
         for (int i = 0; i < prices.size() - 2; i++) {
-            Assert.assertTrue(prices.get(i) <= prices.get(i + 1));
+            Assert.assertTrue(prices.get(i) <= prices.get(i + 1), "Items sorting failed.");
         }
     }
 
@@ -86,11 +86,10 @@ public class SauceDemoWithStandardUser implements IAbstractTest {
         InventoryPage inventoryPage = new InventoryPage(getDriver());
 
         FooterMenu footer = inventoryPage.getFooter();
-        footer.clickFacebook();
+        Facebook fb = footer.clickFacebook();
         ArrayList<String> handlers = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(handlers.get(1));
-        Assert.assertEquals(getDriver().getCurrentUrl(), R.TESTDATA.get("facebook_url"));
-        driver.close();
+        fb.assertPageOpened();
 
     }
 }
