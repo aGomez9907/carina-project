@@ -30,6 +30,7 @@ public class SauceDemoWithStandardUser implements IAbstractTest {
     @Test()
     @MethodOwner(owner = "agomez")
     public void testItems() {
+
         InventoryPage inventoryPage = new InventoryPage(getDriver());
         InventoryItemPage inventoryItemPage = inventoryPage.selectItemByName("Sauce Labs Onesie");
         inventoryItemPage.assertPageOpened();
