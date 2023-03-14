@@ -35,6 +35,7 @@ public class SauceDemoWithStandardUser implements IAbstractTest {
         InventoryItemPage inventoryItemPage = inventoryPage.selectItemByName("Sauce Labs Onesie");
         inventoryItemPage.assertPageOpened();
 
+
         Assert.assertTrue(inventoryItemPage.assertInventoryItem("Sauce Labs Onesie"), "Incorrect item page");
     }
 
